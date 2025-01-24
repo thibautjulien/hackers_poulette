@@ -7,6 +7,9 @@
     </head>
 
     <body>
+        <?php
+            require_once 'includes/db.php';
+        ?>
         
     </body>
 </html>
