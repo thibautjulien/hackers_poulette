@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Hackers Poulette</title>
 
+        <link rel="stylesheet" href="assets/css/styles.css">
 
         <!-- Bootstrap -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -12,14 +13,35 @@
     </head>
 
     <body>
-        <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-        </div>
-        <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-        </div>
+        <section id="form">
+            <form action="">
+                <div class="card w-50 p-5">
+                    <div class="d-flex flex-row">
+                        <!-- Input NAME -->
+                        <input type="text" class="form-control me-3" id="name" name="name" placeholder="Your name" minlength="2" maxlength="255" required>
+
+                        <!-- Input FIRSTNAME -->
+                        <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Your firstname" minlength="2" maxlength="255" required>
+                    </div>
+
+                    <div class="my-3">
+                        <!-- Input EMAIL -->
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Your email" required>
+                    </div>
+                    
+
+                    <!-- Input FILE -->
+                    <input type="file" class="form-control my-3" id="file" name="file" placeholder="Your file" required>
+
+                    <!-- Input DESCRIPTION -->
+                    <textarea type="text" class="form-control my-3" id="text" name="text" placeholder="Your description" minlength="2" maxlength="1000" required></textarea>
+
+                    <button type="submit" class="my-3">Submit</button>
+                </div>
+                    
+            </form>
+        </section>
+
         <?php
             require_once 'includes/db.php';
         ?>
