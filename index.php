@@ -27,12 +27,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':file', $filePath);
         $stmt->bindParam(':description', $description);
-
         // Exécuter la requête
         if ($stmt->execute()) {
-            echo "Données insérées avec succès.";
+
         } else {
-            echo "Erreur lors de l'insertion des données.";
+            echo "<h2 class='title'>Erreur lors de l'insertion des données0.</h2>";
         }
     } catch (PDOException $e) {
         echo "Erreur : " . $e->getMessage();
