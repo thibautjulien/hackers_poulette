@@ -48,9 +48,13 @@
         </form>
     </section>
 
+    <!-- Connexion DB -->
     <?php
-            require_once 'includes/db.php';
-        ?>
+        require_once 'includes/db.php';
+    ?>
+
+    <!-- Validation FORM -->
+    <script src="./assets/js/validation.js"></script>
 </body>
 
 </html>
