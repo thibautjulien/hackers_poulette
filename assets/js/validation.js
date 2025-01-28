@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("form");
+    const form = document.getElementById("formContainer");
 
     form.addEventListener("submit", function (event) {
         // Empêcher l'envoi du formulaire si les validations échouent

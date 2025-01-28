@@ -5,6 +5,7 @@ require_once 'includes/db.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Récupérer les valeurs du formulaire
+
     $name = $_POST['name'];
     $firstname = $_POST['firstname'];
     $email = $_POST['email'];
@@ -62,10 +63,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
 
-<section id="form" class="get-in-touch">
+<section class="get-in-touch">
     <h1 class="title">Send a ticket</h1>
 
-    <form id="form" action="" method="post" enctype="multipart/form-data" class="contact-form row">
+    <form id="formContainer" action="" method="post" enctype="multipart/form-data" class="contact-form row">
 
 
         <!-- Input NAME -->
