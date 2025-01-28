@@ -1,3 +1,47 @@
+<?php
+
+require_once 'includes/db.php';
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Récupérer les valeurs du formulaire
+    $name = $_POST['name'];
+    $firstname = $_POST['firstname'];
+    $email = $_POST['email'];
+    $description = $_POST['description'];
+    $file = $_FILES['file'];
+
+    // Vérifier si un fichier a été téléchargé
+    if (isset($_FILES['file']) && $_FILES['file']['error'] == 0) {
+        $filePath = 'uploads/' . basename($_FILES['file']['name']);
+        move_uploaded_file($_FILES['file']['tmp_name'], $filePath);
+    }
+
+    try {
+        // Préparer la requête d'insertion avec PDO
+        $stmt = $bdd->prepare("INSERT INTO tickets (name, firstname, email, file , description) VALUES (:name, :firstname,:email , :file, :description)");
+
+        // Lier les paramètres
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':firstname', $firstname);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':file', $filePath);
+        $stmt->bindParam(':description', $description);
+
+        // Exécuter la requête
+        if ($stmt->execute()) {
+            echo "Données insérées avec succès.";
+        } else {
+            echo "Erreur lors de l'insertion des données.";
+        }
+    } catch (PDOException $e) {
+        echo "Erreur : " . $e->getMessage();
+    }
+
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -18,9 +62,9 @@
 
 <body>
     <section id="form">
-        <form action="">
+        <form action="" method="post" enctype="multipart/form-data">
             <div class="card w-50 p-5">
-                <div class="d-flex flex-row my-3">
+                <div class="d-flex flex-row">
                     <!-- Input NAME -->
                     <input type="text" class="form-control me-3" id="name" name="name" placeholder="Your name"
                         minlength="2" maxlength="255" required>
@@ -39,8 +83,8 @@
                 <input type="file" class="form-control my-3" id="file" name="file" placeholder="Your file">
 
                 <!-- Input DESCRIPTION -->
-                <textarea type="text" class="form-control my-3" id="text" name="text" placeholder="Your description"
-                    minlength="2" maxlength="1000" required></textarea>
+                <textarea type="text" class="form-control my-3" id="description" name="description"
+                    placeholder="Your description" minlength="2" maxlength="1000" required></textarea>
 
                 <button type="submit" class="my-3">Submit</button>
             </div>
