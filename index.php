@@ -27,12 +27,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':file', $filePath);
         $stmt->bindParam(':description', $description);
-
         // Exécuter la requête
         if ($stmt->execute()) {
-            echo "Données insérées avec succès.";
+
         } else {
-            echo "Erreur lors de l'insertion des données.";
+            echo "<h2 class='title'>Erreur lors de l'insertion des données0.</h2>";
         }
     } catch (PDOException $e) {
         echo "Erreur : " . $e->getMessage();
@@ -53,52 +52,64 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="assets/css/styles.css">
 
     <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"
-        defer></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <body>
-    <section id="form">
-        <form action="" method="post" enctype="multipart/form-data">
-            <div class="card w-50 p-5">
-                <div class="d-flex flex-row">
-                    <!-- Input NAME -->
-                    <input type="text" class="form-control me-3" id="name" name="name" placeholder="Your name"
-                        minlength="2" maxlength="255" required>
+<section id="form" class="get-in-touch">
+    <h1 class="title">Send a ticket</h1>
+    <form action="" method="post" enctype="multipart/form-data" class="contact-form row">
 
-                    <!-- Input FIRSTNAME -->
-                    <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Your firstname"
-                        minlength="2" maxlength="255" required>
-                </div>
+        <div class="form-field col-lg-6">
+            <!-- Input NAME -->
+            <input type="text" class="input-text js-input" id="name" name="name"
+                   minlength="2" maxlength="255" required>
+            <label class="label" for="name">Your name</label>
+        </div>
 
-                <div class="my-3">
-                    <!-- Input EMAIL -->
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Your email" required>
-                </div>
+        <div class="form-field col-lg-6">
+            <!-- Input FIRSTNAME -->
+            <input type="text" class="input-text js-input" id="firstname" name="firstname"
+                   minlength="2" maxlength="255" required>
+            <label class="label" for="firstname">Your firstname</label>
+        </div>
 
-                <!-- Input FILE -->
-                <input type="file" class="form-control my-3" id="file" name="file" placeholder="Your file">
+        <div class="form-field col-lg-6">
+            <!-- Input EMAIL -->
+            <input type="email" class="input-text js-input" id="email" name="email">
+            <label class="label" for="email">Your email</label>
+        </div>
 
-                <!-- Input DESCRIPTION -->
-                <textarea type="text" class="form-control my-3" id="description" name="description"
-                    placeholder="Your description" minlength="2" maxlength="1000" required></textarea>
 
-                <button type="submit" class="my-3">Submit</button>
-            </div>
+        <div class="form-field col-lg-6">
+            <!-- Input FILE -->
+            <input type="file" class="input-text js-input" id="file" name="file">
+        </div>
 
-        </form>
-    </section>
+        <div class="form-field col-lg-12">
+            <!-- Input DESCRIPTION -->
+            <input type="text" class="input-text js-input" id="description" name="description" minlength="2"
+                   maxlength="1000" required></input>
+            <label class="label" for="description">Your description</label>
+        </div>
 
-    <!-- Connexion DB -->
-    <?php
-        require_once 'includes/db.php';
-    ?>
+        <div class="form-field col-lg-6">
+            <button type="submit" id="submit" class="submit-btn">Submit</button>
+        </div>
 
-    <!-- Validation FORM -->
-    <script src="./assets/js/validation.js"></script>
+
+    </form>
+</section>
+
+<!-- Connexion DB -->
+<?php
+require_once 'includes/db.php';
+?>
+
+<!-- Validation FORM -->
+<script src="./assets/js/validation.js"></script>
 </body>
 
 </html>
