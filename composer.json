@@ -1,0 +1,7 @@
+{
+    "name": "thibenja/hackerspoulette",
+    "description": "BeCode project in DUO",
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
+}
