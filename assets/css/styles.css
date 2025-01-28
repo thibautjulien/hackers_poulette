@@ -1,3 +1,10 @@
+.error {
+    color: red;
+    font-size: 0.9em;
+
+    position: absolute;
+}
+
 
 .get-in-touch {
     max-width: 800px;
@@ -103,4 +110,3 @@
     line-height: 26px;
     font-weight: 400;
 }
-

@@ -55,44 +55,53 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Validation FORM -->
+    <script src="./assets/js/validation.js" defer></script>
 </head>
 
 <body>
+
 <section id="form" class="get-in-touch">
     <h1 class="title">Send a ticket</h1>
-    <form action="" method="post" enctype="multipart/form-data" class="contact-form row">
 
+    <form id="form" action="" method="post" enctype="multipart/form-data" class="contact-form row">
+
+
+        <!-- Input NAME -->
         <div class="form-field col-lg-6">
-            <!-- Input NAME -->
-            <input type="text" class="input-text js-input" id="name" name="name"
-                   minlength="2" maxlength="255" required>
+            <input type="text" class="input-text js-input" id="name" name="name">
             <label class="label" for="name">Your name</label>
+            <span class="error" id="nameError"></span>
         </div>
 
+        <!-- Input FIRSTNAME -->
         <div class="form-field col-lg-6">
-            <!-- Input FIRSTNAME -->
-            <input type="text" class="input-text js-input" id="firstname" name="firstname"
-                   minlength="2" maxlength="255" required>
+            <input type="text" class="input-text js-input" id="firstname" name="firstname">
             <label class="label" for="firstname">Your firstname</label>
+            <span class="error" id="firstnameError"></span>
         </div>
 
+
+        <!-- Input EMAIL -->
         <div class="form-field col-lg-6">
-            <!-- Input EMAIL -->
             <input type="email" class="input-text js-input" id="email" name="email">
+            <span class="error" id="emailError"></span>
             <label class="label" for="email">Your email</label>
         </div>
 
-
+        <!-- Input FILE -->
         <div class="form-field col-lg-6">
-            <!-- Input FILE -->
             <input type="file" class="input-text js-input" id="file" name="file">
+            <span class="error" id="fileError"></span>
         </div>
 
+        <!-- Input DESCRIPTION -->
         <div class="form-field col-lg-12">
-            <!-- Input DESCRIPTION -->
-            <input type="text" class="input-text js-input" id="description" name="description" minlength="2"
-                   maxlength="1000" required></input>
-            <label class="label" for="description">Your description</label>
+            <input class="input-text js-input" id="description" name="description"></input>
+            <label class="label" for="name">Your description</label>
+
+            <span class="error" id="descriptionError"></span>
         </div>
 
         <div class="form-field col-lg-6">
@@ -107,9 +116,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <?php
 require_once 'includes/db.php';
 ?>
-
-<!-- Validation FORM -->
-<script src="./assets/js/validation.js"></script>
 </body>
 
 </html>
