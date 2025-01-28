@@ -72,7 +72,7 @@
 
 .contact-form .submit-btn {
     display: inline-block;
-    background-color: #000;
+    
     background-image: linear-gradient(125deg, #a72879, #064497);
     color: #fff;
     text-transform: uppercase;
