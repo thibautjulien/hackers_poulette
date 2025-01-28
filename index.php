@@ -53,57 +53,70 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="assets/css/styles.css">
 
     <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"
-        defer></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <!-- Validation FORM -->
     <script src="./assets/js/validation.js" defer></script>
 </head>
 
 <body>
-    <section id="form">
-        <form id="form" action="" method="post" enctype="multipart/form-data">
-            <div class="card w-50 p-5">
-                <div class="d-flex flex-row my-3">
-                    <!-- Input NAME -->
-                    <input type="text" class="form-control me-3" id="name" name="name" placeholder="Your name">
-                    <span class="error" id="nameError"></span>
 
-                    <!-- Input FIRSTNAME -->
-                    <input type="text" class="form-control" id="firstname" name="firstname"
-                        placeholder="Your firstname">
-                    <span class="error" id="firstnameError"></span>
-                </div>
+<section id="form" class="get-in-touch">
+    <h1 class="title">Send a ticket</h1>
 
-                <!-- Input EMAIL -->
-                <div class="my-3">
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Your email">
-                    <span class="error" id="emailError"></span>
-                </div>
+    <form id="form" action="" method="post" enctype="multipart/form-data" class="contact-form row">
 
-                <!-- Input FILE -->
-                <div class="my-3">
-                    <input type="file" class="form-control" id="file" name="file">
-                    <span class="error" id="fileError"></span>
-                </div>
 
-                <!-- Input DESCRIPTION -->
-                <textarea class="form-control my-3" id="description" name="description"
-                    placeholder="Your description"></textarea>
-                <span class="error" id="descriptionError"></span>
+        <!-- Input NAME -->
+        <div class="form-field col-lg-6">
+            <input type="text" class="input-text js-input" id="name" name="name">
+            <label class="label" for="name">Your name</label>
+            <span class="error" id="nameError"></span>
+        </div>
 
-                <button type="submit" class="my-3">Submit</button>
-            </div>
-        </form>
-    </section>
+        <!-- Input FIRSTNAME -->
+        <div class="form-field col-lg-6">
+            <input type="text" class="input-text js-input" id="firstname" name="firstname">
+            <label class="label" for="firstname">Your firstname</label>
+            <span class="error" id="firstnameError"></span>
+        </div>
 
-    <!-- Connexion DB -->
-    <?php
-        require_once 'includes/db.php';
-    ?>
+
+        <!-- Input EMAIL -->
+        <div class="form-field col-lg-6">
+            <input type="email" class="input-text js-input" id="email" name="email">
+            <span class="error" id="emailError"></span>
+            <label class="label" for="email">Your email</label>
+        </div>
+
+        <!-- Input FILE -->
+        <div class="form-field col-lg-6">
+            <input type="file" class="input-text js-input" id="file" name="file">
+            <span class="error" id="fileError"></span>
+        </div>
+
+        <!-- Input DESCRIPTION -->
+        <div class="form-field col-lg-12">
+            <input class="input-text js-input" id="description" name="description"></input>
+            <label class="label" for="name">Your description</label>
+
+            <span class="error" id="descriptionError"></span>
+        </div>
+
+        <div class="form-field col-lg-6">
+            <button type="submit" id="submit" class="submit-btn">Submit</button>
+        </div>
+
+
+    </form>
+</section>
+
+<!-- Connexion DB -->
+<?php
+require_once 'includes/db.php';
+?>
 </body>
 
 </html>
