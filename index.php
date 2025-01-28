@@ -8,28 +8,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['name'];
     $firstname = $_POST['firstname'];
     $email = $_POST['email'];
-    $text = $_POST['text'];
+    $description = $_POST['description'];
+    $file = $_FILES['file'];
 
     echo "<h2>Starting Requests...</h2>";
-
     // Vérifier si un fichier a été téléchargé
     if (isset($_FILES['file']) && $_FILES['file']['error'] == 0) {
         $filePath = 'uploads/' . basename($_FILES['file']['name']);
         move_uploaded_file($_FILES['file']['tmp_name'], $filePath);
     }
 
-    // Préparer la requête d'insertion
-    $stmt = $bdd->prepare("INSERT INTO tickets (title, description, publish_date) VALUES (?, ?, NOW())");
+    try {
+        // Préparer la requête d'insertion avec PDO
+        $stmt = $bdd->prepare("INSERT INTO tickets (name, firstname, email, file , description) VALUES (:name, :firstname,:email , :file, :description)");
 
-    // Exécuter la requête
-    if ($stmt->execute()) {
-        echo "Données insérées avec succès.";
-    } else {
-        echo "Erreur : " . $stmt->error;
+        // Lier les paramètres
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':firstname', $firstname);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':file', $filePath);
+        $stmt->bindParam(':description', $description);
+
+        // Exécuter la requête
+        if ($stmt->execute()) {
+            echo "Données insérées avec succès.";
+        } else {
+            echo "Erreur lors de l'insertion des données.";
+        }
+    } catch (PDOException $e) {
+        echo "Erreur : " . $e->getMessage();
     }
 
-    // Fermer la déclaration
-    $stmt->close();
 }
 
 ?>
@@ -75,7 +84,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="file" class="form-control my-3" id="file" name="file" placeholder="Your file">
 
             <!-- Input DESCRIPTION -->
-            <textarea type="text" class="form-control my-3" id="text" name="text" placeholder="Your description"
+            <textarea type="text" class="form-control my-3" id="description" name="description"
+                      placeholder="Your description"
                       minlength="2" maxlength="1000" required></textarea>
 
             <button type="submit" class="my-3">Submit</button>
@@ -83,9 +93,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     </form>
 </section>
-
-<?php
-require_once 'includes/db.php';
-?>
 </body>
 </html>
