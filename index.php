@@ -1,5 +1,37 @@
 <?php
 
+require_once 'includes/db.php';
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Récupérer les valeurs du formulaire
+    $name = $_POST['name'];
+    $firstname = $_POST['firstname'];
+    $email = $_POST['email'];
+    $text = $_POST['text'];
+
+    echo "<h2>Starting Requests...</h2>";
+
+    // Vérifier si un fichier a été téléchargé
+    if (isset($_FILES['file']) && $_FILES['file']['error'] == 0) {
+        $filePath = 'uploads/' . basename($_FILES['file']['name']);
+        move_uploaded_file($_FILES['file']['tmp_name'], $filePath);
+    }
+
+    // Préparer la requête d'insertion
+    $stmt = $bdd->prepare("INSERT INTO tickets (title, description, publish_date) VALUES (?, ?, NOW())");
+
+    // Exécuter la requête
+    if ($stmt->execute()) {
+        echo "Données insérées avec succès.";
+    } else {
+        echo "Erreur : " . $stmt->error;
+    }
+
+    // Fermer la déclaration
+    $stmt->close();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +53,7 @@
 
 <body>
 <section id="form">
-    <form action="">
+    <form action="" method="post" enctype="multipart/form-data">
         <div class="card w-50 p-5">
             <div class="d-flex flex-row">
                 <!-- Input NAME -->
@@ -40,7 +72,7 @@
 
 
             <!-- Input FILE -->
-            <input type="file" class="form-control my-3" id="file" name="file" placeholder="Your file" required>
+            <input type="file" class="form-control my-3" id="file" name="file" placeholder="Your file">
 
             <!-- Input DESCRIPTION -->
             <textarea type="text" class="form-control my-3" id="text" name="text" placeholder="Your description"
