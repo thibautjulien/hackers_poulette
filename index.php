@@ -11,7 +11,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $description = $_POST['description'];
     $file = $_FILES['file'];
 
-    echo "<h2>Starting Requests...</h2>";
     // Vérifier si un fichier a été téléchargé
     if (isset($_FILES['file']) && $_FILES['file']['error'] == 0) {
         $filePath = 'uploads/' . basename($_FILES['file']['name']);

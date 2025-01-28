@@ -6,7 +6,6 @@ try {
     // Affichage des erreurs pour afficher les erreurs SQL
     $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    echo "<h1>Connexion réussie</h1>";
 } catch (Exception $e) {
     die('Erreur : ' . $e->getMessage());
 }
