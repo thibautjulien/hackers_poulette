@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("formContainer");
+    const form = document.getElementById("ticketForm");
 
     form.addEventListener("submit", function (event) {
         // Empêcher l'envoi du formulaire si les validations échouent
@@ -30,8 +30,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // Valider le champ "Email"
-        if (!validateEmail(email.value) || !validateString(email.value, 2, 255)) {
-            showError("emailError", "L'adresse email est invalide.");
+        if (!validateEmail(email.value)) {
+            showError("emailError", "L'adresse e-mail est invalide.");
             isValid = false;
         }
 
@@ -50,29 +50,29 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // Valider le champ "Description"
-        if (!validateString(description.value, 2, 1000)) {
-            showError("descriptionError", "La description est requise (2-1000 caractères).");
+        if (!validateString(description.value, 10, 500)) {
+            showError("descriptionError", "La description doit contenir entre 10 et 500 caractères.");
             isValid = false;
         }
 
         // Si tout est valide, on peut soumettre le formulaire
         if (isValid) {
-            form.submit();
+            form.requestSubmit(); // Utiliser requestSubmit() pour éviter les conflits
         }
     });
 
     // Fonction pour afficher un message d'erreur
     function showError(elementId, message) {
         const errorElement = document.getElementById(elementId);
-        if (errorElement) {
-            errorElement.textContent = message;
-        }
+        errorElement.textContent = message;
     }
 
     // Fonction pour effacer les messages d'erreur
     function clearErrors() {
-        const errors = document.querySelectorAll(".error");
-        errors.forEach((error) => (error.textContent = ""));
+        const errorElements = document.querySelectorAll('.error');
+        errorElements.forEach(element => {
+            element.textContent = '';
+        });
     }
 
     // Fonction pour valider une chaîne de caractères avec une taille minimale et maximale
